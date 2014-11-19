@@ -1,2 +1,3 @@
 app/node_modules
 app/public/.sass-cache
+app/npm-debug.log

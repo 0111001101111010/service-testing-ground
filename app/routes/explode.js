@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var fs = require('fs');
 var Canvas = require('canvas');
 
 
@@ -10,12 +10,20 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function (req,res) {
-    var top, bottom;
+    //create a white background
+    var top, bottom, img;
     top = req.body.top;
     bottom = req.body.bottom;
+    //create image reader
     Image = Canvas.Image;
+    img = new Image;
+
+    //read in the image
+    img.src = fs.readFileSync(__dirname + '/test.jpg');
+
     canvas = new Canvas(400,200);
     ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
     ctx.font = '24px Impact';
     ctx.fillText(top, 50, 50);
     ctx.fillText(bottom, 50, 150);
@@ -27,7 +35,8 @@ router.post('/', function (req,res) {
     ctx.lineTo(50 + te.width, 52);
     ctx.stroke();
 
-console.log('<img src="' + canvas.toDataURL() + '" />');
+
+//console.log('<img src="' + canvas.toDataURL() + '" />');
   res.render('index', { title: 'GIF This', image: canvas.toDataURL()});
   //res.redirect('back');
 });

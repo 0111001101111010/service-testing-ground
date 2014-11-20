@@ -14,11 +14,11 @@ router.post('/', function (req,res) {
     top = req.body.top;
     bottom = req.body.bottom;
     Image = Canvas.Image;
-    canvas = new Canvas(200,200);
+    canvas = new Canvas(400,200);
     ctx = canvas.getContext('2d');
-    ctx.font = '40px Impact';
-    //ctx.rotate(1/10);
+    ctx.font = '24px Impact';
     ctx.fillText(top, 50, 50);
+    ctx.fillText(bottom, 50, 150);
 
     var te = ctx.measureText(top);
     ctx.strokeStyle = 'rgba(0,0,0,0.5)';

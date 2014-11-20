@@ -7,5 +7,10 @@
   <body>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
+    <form id="gif" action="/explode" method="post">
+        <input type="text" name="top" placeholder="top text">
+        <input type="text" name="bottom" placeholder="bottom text">
+        <input type="submit" value="Gif Me">
+    </form>
   </body>
 </html>

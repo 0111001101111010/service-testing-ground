@@ -5,7 +5,8 @@ var router = express.Router();
 // Load the AWS SDK for Node.js
 var AWS = require('aws-sdk');
 var s3 = require('s3');
-
+var fs = require('fs');
+var config = require('../config/s3config.json');
 /**
  * Don't hard-code your credentials!
  * Export the following environment variables instead:
@@ -22,26 +23,42 @@ var s3 = require('s3');
 //console.log(process.env);
 
 AWS.config.update({
-    accessKeyId: "",
-    secretAccessKey: "",
+    accessKeyId: config.accessKeyId,
+    secretAccessKey: config.secretAccessKey
     //"region": "sa-east-1"   <- If you want send something to your bucket, you need take off this settings, because the S3 are global.
 });
 
-// Create a bucket using bound parameters and put something in it.
-// Make sure to change the bucket name from "myBucket" to something unique.
-var s3bucket = new AWS.S3({params: {Bucket: 'stanzheng-staging'}});
-s3bucket.createBucket(function() {
-   var data = {Key: 'so this internet?'};
-  // s3bucket.getSignedUrl('getObject', data, function(err, url){
-  //   console.log('the url of the image is', url);
-  // });
-  s3bucket.putObject(data, function(err, data) {
-    if (err) {
-      console.log("Error uploading data: ", err);
-    } else {
-      console.log("Successfully uploaded data to myBucket/myKey");
-    }
+function upload(){
+  // Create a bucket using bound parameters and put something in it.
+  // Make sure to change the bucket name from "myBucket" to something unique.
+  var s3bucket = new AWS.S3({params: {Bucket: 'stanzheng-staging'}});
+  s3bucket.createBucket(function() {
+     var data = {Key: 'so this internet?'};
+    // s3bucket.getSignedUrl('getObject', data, function(err, url){
+    //   console.log('the url of the image is', url);
+    // });
+    s3bucket.putObject(data, function(err, data) {
+      if (err) {
+        console.log("Error uploading data: ", err);
+      } else {
+        console.log("Successfully uploaded data to myBucket/myKey");
+      }
+    });
   });
+}
+//...
+router.post('/', function(req, res) {
+    var fstream;
+    upload();
+    req.pipe(req.busboy);
+    req.busboy.on('file', function (fieldname, file, filename) {
+        console.log("Uploading: " + filename);
+        fstream = fs.createWriteStream(__dirname + '/files/' + filename);
+        file.pipe(fstream);
+        fstream.on('close', function () {
+            res.redirect('back');
+        });
+    });
 });
 
 

@@ -19,9 +19,9 @@ router.post('/', function (req,res) {
     img = new Image;
 
     //read in the image
-    img.src = fs.readFileSync(__dirname + '/test.jpg');
+    img.src = fs.readFileSync(__dirname + '/wolf.jpg');
 
-    canvas = new Canvas(400,200);
+    canvas = new Canvas(600,400);
     ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
     ctx.font = '24px Impact';

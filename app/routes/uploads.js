@@ -51,48 +51,6 @@ function upload(path, myKey){
   });
 }
 
-function uploadStreams(myKey,myBody){
-  var compress = zlib.createGzip();
-  var payload = new s3Stream.upload({
-    "Bucket": "stanzheng-staging",
-    "Key": "testing"
-  });
-
-  // Optional configuration
-  payload.maxPartSize(20971520); // 20 MB
-  payload.concurrentParts(5);
-
-  // Handle errors.
-  payload.on('error', function (error) {
-    console.log(error);
-  });
-
-  /* Handle progress. Example details object:
-     { ETag: '"f9ef956c83756a80ad62f54ae5e7d34b"',
-       PartNumber: 5,
-       receivedSize: 29671068,
-       uploadedSize: 29671068 }
-  */
-  payload.on('part', function (details) {
-    console.log(details);
-  });
-
-  /* Handle upload completion. Example details object:
-     { Location: 'https://bucketName.s3.amazonaws.com/filename.ext',
-       Bucket: 'bucketName',
-       Key: 'filename.ext',
-       ETag: '"bf2acbedf84207d696c8da7dbb205b9f-5"' }
-  */
-  payload.on('uploaded', function (details) {
-    console.log(details);
-  });
-
-  // Pipe the incoming filestream through compression, and up to S3.
-  myBody.pipe(compress).pipe(payload);
-}
-
-
-//...
 router.post('/', function(req, res) {
     var fstream;
     req.pipe(req.busboy);

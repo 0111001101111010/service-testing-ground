@@ -10,19 +10,21 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function (req,res) {
-
+    var top, bottom;
+    top = req.body.top;
+    bottom = req.body.bottom;
     Image = Canvas.Image;
     canvas = new Canvas(200,200);
     ctx = canvas.getContext('2d');
-    ctx.font = '30px Impact';
-    ctx.rotate(1/10);
-    ctx.fillText("True!", 50, 100);
+    ctx.font = '40px Impact';
+    //ctx.rotate(1/10);
+    ctx.fillText(top, 50, 50);
 
-    var te = ctx.measureText('Awesome!');
+    var te = ctx.measureText(top);
     ctx.strokeStyle = 'rgba(0,0,0,0.5)';
     ctx.beginPath();
-    ctx.lineTo(50, 102);
-    ctx.lineTo(50 + te.width, 102);
+    ctx.lineTo(50, 52);
+    ctx.lineTo(50 + te.width, 52);
     ctx.stroke();
 
 console.log('<img src="' + canvas.toDataURL() + '" />');

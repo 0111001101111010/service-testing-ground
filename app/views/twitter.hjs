@@ -14,5 +14,15 @@
         <input type="text" name="bottom" placeholder="bottom text">
         <input type="submit" value="Gif Me">
     </form>
+    <table>
+       {{#tweets}}
+      <tr>
+        <td>{{> tweet}}</td>
+      </tr>
+       {{/tweets}} 
+    <tr>
+      <td></td>
+    </tr>
+  </table>
   </body>
 </html>

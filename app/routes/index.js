@@ -4,7 +4,6 @@ var clock = require('./clock.js');
 var moment = require('moment');
 
 /* GET home page. */
-console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a").toString());
 router.get('/', function(req, res) {
   //console.log(clock());
   res.render('clock', {

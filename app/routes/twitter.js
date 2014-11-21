@@ -8,18 +8,20 @@ var Promise = require("bluebird");
 var twitter = require('twitter');
 var util = require('util');
 var tConfig = require('../config/twitter.json');
-
-
-
 var twit = new twitter(tConfig);
-
-// twit.search('@stanzheng', function(data) {
-//     console.log(util.inspect(data));
-// });
-
+//refactor as promise later
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'GIF This', image: 'http://placehold.it/200x200' });
+
+  //refactor with bluebird later
+  twit.search('@stanzheng', function(data) {
+    console.log(data);
+     res.render('index',
+       { title: 'GIF This',
+         image: 'http://placehold.it/200x200',
+         tweets: data.statuses
+     });
+  });
 });
 
 router.post('/', function (req,res) {

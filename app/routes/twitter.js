@@ -3,15 +3,19 @@ var router = express.Router();
 var fs = require('fs');
 var Canvas = require('canvas');
 var im = require('imagemagick');
+var Promise = require("bluebird");
+
 var twitter = require('twitter');
 var util = require('util');
 var tConfig = require('../config/twitter.json');
 
+
+
 var twit = new twitter(tConfig);
 
-twit.search('@stanzheng', function(data) {
-    console.log(util.inspect(data));
-});
+// twit.search('@stanzheng', function(data) {
+//     console.log(util.inspect(data));
+// });
 
 /* GET home page. */
 router.get('/', function(req, res) {

@@ -15,8 +15,8 @@ router.get('/', function(req, res) {
 
   //refactor with bluebird later
   twit.search('@stanzheng', function(data) {
-    console.log(data);
-     res.render('index',
+    console.log(util.inspect(data.statuses));
+     res.render('twitter',
        { title: 'GIF This',
          image: 'http://placehold.it/200x200',
          tweets: data.statuses

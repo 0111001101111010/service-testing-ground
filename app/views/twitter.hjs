@@ -4,7 +4,7 @@
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <meta http-equiv="refresh" content="10;" />
+  <meta http-equiv="refresh" content="30;" />
   <body>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
@@ -14,12 +14,12 @@
         <input type="text" name="bottom" placeholder="bottom text">
         <input type="submit" value="Gif Me">
     </form>
-    <table>
+  <table>
        {{#tweets}}
       <tr>
-        <td>{{> tweet}}</td>
+        <td>{{text}}</td>
       </tr>
-       {{/tweets}} 
+       {{/tweets}}
     <tr>
       <td></td>
     </tr>

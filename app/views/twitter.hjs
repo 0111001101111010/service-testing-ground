@@ -17,7 +17,7 @@
   <table>
        {{#tweets}}
       <tr>
-        <td>{{text}}</td>
+        <td><code>{{text}}</code></td>
       </tr>
        {{/tweets}}
     <tr>

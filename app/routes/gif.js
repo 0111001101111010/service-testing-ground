@@ -7,7 +7,7 @@ var im = require('imagemagick');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'GIF This', image: 'http://placehold.it/200x200' });
+  res.render('index', { title: 'GIF This', image: 'http://placehold.it/300x300' });
 });
 
 router.post('/', function (req,res) {

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var Canvas = require('canvas');
+var im = require('imagemagick');
 
 
 /* GET home page. */
@@ -17,13 +18,14 @@ router.post('/', function (req,res) {
     //create image reader
     Image = Canvas.Image;
     img = new Image;
-
     //read in the image
-    img.src = fs.readFileSync(__dirname + '/wolf.jpg');
+    img.src = fs.readFileSync(__dirname + '/endless.gif');
 
-    canvas = new Canvas(600,400);
+    //edit canvas size
+    canvas = new Canvas(300,300);
     ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
+    ctx.fillStyle = '#fff';
     ctx.font = '24px Impact';
     ctx.fillText(top, 50, 50);
     ctx.fillText(bottom, 50, 150);

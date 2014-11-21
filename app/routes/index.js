@@ -4,10 +4,14 @@ var clock = require('./clock.js');
 var moment = require('moment');
 
 /* GET home page. */
-console.log(moment().format());
+console.log(moment().format("dddd, MMMM Do YYYY, h:mm:ss a").toString());
 router.get('/', function(req, res) {
   //console.log(clock());
-  res.render('clock', { title: 'The Time is', image: clock(), time: moment().format("dddd, MMMM Do YYYY, h:mm:ss a") });
+  res.render('clock', {
+     title: 'the time is',
+     image: clock(),
+     time: moment().format("dddd, MMMM Do YYYY, h:mm:ss a").toString()
+  });
 });
 
 module.exports = router;

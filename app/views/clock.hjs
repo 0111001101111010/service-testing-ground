@@ -7,7 +7,7 @@
   <meta http-equiv="refresh" content="1;" />
   <body>
     <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
+    <p>Welcome {{ title }}, is {{ time}}</p>
     <div><img src="{{ image }}"/></div>
     <form id="gif" action="/gif" method="post">
         <input type="text" name="top" placeholder="top text">

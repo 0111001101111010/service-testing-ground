@@ -8,7 +8,7 @@
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
     <div><img src="{{ image }}"/></div>
-    <form id="gif" action="/explode" method="post">
+    <form id="gif" action="/gif" method="post">
         <input type="text" name="top" placeholder="top text">
         <input type="text" name="bottom" placeholder="bottom text">
         <input type="submit" value="Gif Me">

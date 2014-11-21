@@ -11,20 +11,20 @@ var tConfig = require('../config/twitter.json');
 var twit = new twitter(tConfig);
 //refactor as promise later
 /* GET home page. */
-router.get('/', function(req, res) {
+// router.get('/', function(req, res) {
+//
+//   //refactor with bluebird later
+//   twit.search('@stanzheng', function(data) {
+//     console.log(util.inspect(data.statuses));
+//      res.render('twitter',
+//        { title: 'GIF This',
+//          image: 'http://placehold.it/200x200',
+//          tweets: data.statuses
+//      });
+//   });
+// });
 
-  //refactor with bluebird later
-  twit.search('@stanzheng', function(data) {
-    console.log(util.inspect(data.statuses));
-     res.render('twitter',
-       { title: 'GIF This',
-         image: 'http://placehold.it/200x200',
-         tweets: data.statuses
-     });
-  });
-});
-
-router.post('/', function (req,res) {
+router.get('/', function (req,res) {
     //create a white background
     var top, bottom, img;
     top = req.body.top;
@@ -33,7 +33,7 @@ router.post('/', function (req,res) {
     Image = Canvas.Image;
     img = new Image;
     //read in the image
-    img.src = fs.readFileSync(__dirname + '/endless.gif');
+    img.src = fs.readFileSync(__dirname + '/myself.jpg');
 
     //edit canvas size
     canvas = new Canvas(300,300);
@@ -55,6 +55,15 @@ router.post('/', function (req,res) {
 //console.log('<img src="' + canvas.toDataURL() + '" />');
   res.render('index', { title: 'GIF This', image: canvas.toDataURL()});
   //res.redirect('back');
+  //refactor with bluebird later
+  twit.search('@stanzheng', function(data) {
+    console.log(util.inspect(data.statuses));
+     res.render('twitter',
+       { title: 'GIF This',
+         image: 'http://placehold.it/200x200',
+         tweets: data.statuses
+     });
+  });
 });
 
 module.exports = router;

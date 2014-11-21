@@ -28,7 +28,7 @@ router.post('/', function (req,res) {
     ctx.fillStyle = '#fff';
     ctx.font = '24px Impact';
     ctx.fillText(top, 50, 50);
-    ctx.fillText(bottom, 50, 150);
+    ctx.fillText(bottom, 50, 240);
 
     var te = ctx.measureText(top);
     ctx.strokeStyle = 'rgba(0,0,0,0.5)';

@@ -25,13 +25,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var uploads = require('./routes/uploads');
-var explode = require('./routes/explode');
+var gif = require('./routes/gif');
 var streamvideo = require('./routes/streamvideo');
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/uploads', uploads);
-app.use('/explode', explode);
+app.use('/gif', gif);
 app.use('/streamvideo', streamvideo);
 
 /// catch 404 and forwarding to error handler

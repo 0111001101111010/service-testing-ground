@@ -27,19 +27,19 @@ var twit = new twitter(tConfig);
 router.get('/', function (req,res) {
     //create a white background
     var top, bottom, img;
-    top = req.body.top;
-    bottom = req.body.bottom;
+    top = req.query.top;
+    bottom = req.query.bottom;
     //create image reader
     Image = Canvas.Image;
     img = new Image;
     //read in the image
-    img.src = fs.readFileSync(__dirname + '/myself.jpg');
+    img.src = fs.readFileSync(__dirname + '/myimg.jpg');
 
     //edit canvas size
     canvas = new Canvas(300,300);
     ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = '#f0f';
     ctx.font = '24px Impact';
     ctx.fillText(top, 50, 50);
     ctx.fillText(bottom, 50, 240);
@@ -53,17 +53,23 @@ router.get('/', function (req,res) {
 
 
 //console.log('<img src="' + canvas.toDataURL() + '" />');
-  res.render('index', { title: 'GIF This', image: canvas.toDataURL()});
+  //res.render('index', { title: 'GIF This', image: canvas.toDataURL()});
   //res.redirect('back');
   //refactor with bluebird later
-  twit.search('@stanzheng', function(data) {
-    console.log(util.inspect(data.statuses));
-     res.render('twitter',
-       { title: 'GIF This',
-         image: 'http://placehold.it/200x200',
-         tweets: data.statuses
-     });
-  });
+  //console.log('<img src="' + canvas.toDataURL() + '" />');
+  if(req.query.top===undefined){
+    res.render('twitter', { title: 'GIF This', image: "http://placehold.it/200x200"});
+  }
+  else{
+    twit.search('@stanzheng', function(data) {
+      console.log(util.inspect(data.statuses));
+       res.render('twitter',
+         { title: 'GIF This',
+           image: canvas.toDataURL(),
+           tweets: data.statuses
+       });
+    });
+  }
 });
 
 module.exports = router;
